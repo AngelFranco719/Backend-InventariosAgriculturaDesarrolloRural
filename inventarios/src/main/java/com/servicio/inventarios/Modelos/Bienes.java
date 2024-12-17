@@ -1,13 +1,15 @@
 package com.servicio.inventarios.Modelos;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
-@Entity(name = "bienes")
+@Entity
 public class Bienes {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long ID_Bienes;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long ID_Bien;
     private String bien_inventario;
     private String bien_estado;
     private String bien_color;
@@ -16,16 +18,17 @@ public class Bienes {
 
     @ManyToOne
     @JoinColumn(name = "ID_Responsable")
-    private Responsable ID_Responsable;
+    private Responsable bien_resp;
     @ManyToOne
     @JoinColumn(name = "ID_PRODUCTO")
-    private Producto ID_Producto;
+    private Producto bien_prod;
     @ManyToOne
     @JoinColumn(name = "ID_Adquisicion")
-    private Adquisicion ID_Adquisicion;
+    private Adquisicion bien_adq;
     @ManyToOne
     @JoinColumn(name = "ID_ZonaArea")
-    private Zona_Area ID_ZonaArea;
+    @JsonBackReference
+    private Zona_Area bien_zonaArea;
 
     public Bienes() {
     }
@@ -36,18 +39,18 @@ public class Bienes {
         this.bien_color = bien_color;
         this.bien_material = bien_material;
         this.bien_patrimoniable = bien_patrimoniable;
-        this.ID_Responsable = ID_Responsable;
-        this.ID_Producto = ID_Producto;
-        this.ID_Adquisicion = ID_Adquisicion;
-        this.ID_ZonaArea = ID_ZonaArea;
+        this.bien_resp = ID_Responsable;
+        this.bien_prod = ID_Producto;
+        this.bien_adq = ID_Adquisicion;
+        this.bien_zonaArea = ID_ZonaArea;
     }
 
-    public Long getID_Bienes() {
-        return ID_Bienes;
+    public Long getID_Bien() {
+        return ID_Bien;
     }
 
     public void setID_Bienes(Long ID_Bienes) {
-        this.ID_Bienes = ID_Bienes;
+        this.ID_Bien = ID_Bienes;
     }
 
     public String getBien_inventario() {
@@ -90,36 +93,36 @@ public class Bienes {
         this.bien_patrimoniable = bien_patrimoniable;
     }
 
-    public Responsable getID_Responsable() {
-        return ID_Responsable;
+    public Responsable getBienResponsable() {
+        return bien_resp;
     }
 
-    public void setID_Responsable(Responsable ID_Responsable) {
-        this.ID_Responsable = ID_Responsable;
+    public void setBienResponsable(Responsable bien_resp) {
+        this.bien_resp = bien_resp;
     }
 
-    public Producto getID_Producto() {
-        return ID_Producto;
+    public Producto getBienProducto() {
+        return bien_prod;
     }
 
-    public void setID_Producto(Producto ID_Producto) {
-        this.ID_Producto = ID_Producto;
+    public void setBien_Producto(Producto ID_Producto) {
+        this.bien_prod = ID_Producto;
     }
 
-    public Adquisicion getID_Adquisicion() {
-        return ID_Adquisicion;
+    public Adquisicion getBienAdq() {
+        return bien_adq;
     }
 
-    public void setID_Adquisicion(Adquisicion ID_Adquisicion) {
-        this.ID_Adquisicion = ID_Adquisicion;
+    public void setBienAdq(Adquisicion ID_Adquisicion) {
+        this.bien_adq = ID_Adquisicion;
     }
 
-    public Zona_Area getID_ZonaArea() {
-        return ID_ZonaArea;
+    public Zona_Area getBien_zonaArea() {
+        return bien_zonaArea;
     }
 
-    public void setID_ZonaArea(Zona_Area ID_ZonaArea) {
-        this.ID_ZonaArea = ID_ZonaArea;
+    public void setBien_zonaArea(Zona_Area ID_ZonaArea) {
+        this.bien_zonaArea = ID_ZonaArea;
     }
 
 }

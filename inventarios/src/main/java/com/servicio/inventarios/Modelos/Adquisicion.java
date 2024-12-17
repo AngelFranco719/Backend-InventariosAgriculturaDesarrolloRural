@@ -2,18 +2,23 @@ package com.servicio.inventarios.Modelos;
 
 import jakarta.persistence.*;
 import java.util.Date;
+import java.util.List;
 
-@Entity(name = "adquisicion")
+@Entity
 public class Adquisicion {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long ID_Adquisicion; 
-    private String adq_folioFiscal; 
-    private Date adq_fecha; 
-    private String adq_claveArmonizada; 
-    private String adq_factura; 
-    
-    public void Adquisicion(){
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long ID_Adquisicion;
+    private String adq_folioFiscal;
+    private Date adq_fecha;
+    private String adq_claveArmonizada;
+    private String adq_factura;
+
+    @OneToMany(mappedBy = "bien_adq")
+    private List<Bienes> adq_bien;
+
+    public Adquisicion() {
     }
 
     public Adquisicion(String adq_folioFiscal, Date adq_fecha, String adq_claveArmonizada, String adq_factura) {
@@ -62,5 +67,5 @@ public class Adquisicion {
     public void setAdq_factura(String adq_factura) {
         this.adq_factura = adq_factura;
     }
-    
+
 }

@@ -1,18 +1,25 @@
 package com.servicio.inventarios.Modelos;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import java.util.List;
 
-@Entity(name = "zona")
+@Entity
 public class Zona {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ID_Zona;
     private String zon_nivel;
     private String zon_local;
     @ManyToOne
-    @JoinColumn(name = "ID_Localizacion", table = "localizacion")
+    @JoinColumn(name = "ID_Localizacion")
+    @JsonManagedReference
     private Localizacion zon_loc;
+    @OneToMany(mappedBy = "zona")
+    @JsonBackReference
+    private List<Zona_Area> zonaArea;
 
     public Zona() {
     }
@@ -53,6 +60,14 @@ public class Zona {
 
     public void setZon_loc(Localizacion zon_loc) {
         this.zon_loc = zon_loc;
+    }
+
+    public List<Zona_Area> getZonaArea() {
+        return zonaArea;
+    }
+
+    public void setZonaArea(List<Zona_Area> zonaArea) {
+        this.zonaArea = zonaArea;
     }
 
 }

@@ -2,17 +2,23 @@ package com.servicio.inventarios.Modelos;
 
 import jakarta.persistence.*;
 import java.util.Date;
+import java.util.List;
 
-@Entity(name = "responsable")
+@Entity
+@Table(name = "responsable")
 public class Responsable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ID_Responsable;
     private String res_rfc;
     private String res_nombre;
+    @Column(name = "res_fechaResguardo")
     private Date res_fechaResguardo;
     private String res_motivoNoAsigno;
+
+    @OneToMany(mappedBy = "ID_Bien")
+    private List<Bienes> resp_bien;
 
     public Responsable() {
     }

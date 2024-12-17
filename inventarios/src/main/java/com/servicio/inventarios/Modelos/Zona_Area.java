@@ -1,26 +1,34 @@
 package com.servicio.inventarios.Modelos;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import java.util.List;
 
-@Entity(name = "zona_area")
+@Entity
 public class Zona_Area {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ID_ZonaArea;
     @ManyToOne
     @JoinColumn(name = "ID_Zona")
-    private Zona ID_Zona;
+    @JsonManagedReference
+    private Zona zona;
     @ManyToOne
     @JoinColumn(name = "ID_Area")
-    private Area ID_Area;
+    @JsonManagedReference
+    private Area area;
+    @OneToMany(mappedBy = "bien_zonaArea")
+    @JsonManagedReference
+    private List<Bienes> ID_Bien;
 
     public Zona_Area() {
     }
 
-    public Zona_Area(Zona ID_Zona, Area ID_Area) {
-        this.ID_Zona = ID_Zona;
-        this.ID_Area = ID_Area;
+    public Zona_Area(Zona zona, Area area) {
+        this.zona = zona;
+        this.area = area;
     }
 
     public Long getID_ZonaArea() {
@@ -31,20 +39,28 @@ public class Zona_Area {
         this.ID_ZonaArea = ID_ZonaArea;
     }
 
-    public Zona getID_Zona() {
-        return ID_Zona;
+    public Zona getZona() {
+        return zona;
     }
 
-    public void setID_Zona(Zona ID_Zona) {
-        this.ID_Zona = ID_Zona;
+    public void setZona(Zona zona) {
+        this.zona = zona;
     }
 
-    public Area getID_Area() {
-        return ID_Area;
+    public Area getArea() {
+        return area;
     }
 
-    public void setID_Area(Area ID_Area) {
-        this.ID_Area = ID_Area;
+    public void setArea(Area area) {
+        this.area = area;
+    }
+
+    public List<Bienes> getID_Bien() {
+        return ID_Bien;
+    }
+
+    public void setID_Bien(List<Bienes> ID_Bien) {
+        this.ID_Bien = ID_Bien;
     }
 
 }

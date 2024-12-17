@@ -1,15 +1,21 @@
 package com.servicio.inventarios.Modelos;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+import java.util.List;
 
-@Entity(name = "area")
+@Entity
 public class Area {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ID_Area;
     private String are_unidadResponsable;
     private String are_unidadPresupuestal;
+
+    @OneToMany(mappedBy = "area")
+    @JsonBackReference
+    private List<Zona_Area> zonaArea;
 
     public Area() {
     }
@@ -41,6 +47,14 @@ public class Area {
 
     public void setAre_unidadPresupuestal(String are_unidadPresupuestal) {
         this.are_unidadPresupuestal = are_unidadPresupuestal;
+    }
+
+    public List<Zona_Area> getZonaArea() {
+        return zonaArea;
+    }
+
+    public void setZonaArea(List<Zona_Area> zonaArea) {
+        this.zonaArea = zonaArea;
     }
 
 }

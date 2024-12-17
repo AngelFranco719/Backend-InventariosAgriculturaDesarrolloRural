@@ -1,12 +1,13 @@
 package com.servicio.inventarios.Modelos;
 
 import jakarta.persistence.*;
+import java.util.List;
 
-@Entity(name = "producto")
+@Entity
 public class Producto {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_PRODUCTO")
     private Long ID_Producto;
     private String prod_partida;
@@ -14,6 +15,9 @@ public class Producto {
     private String prod_marca;
     private String prod_modelo;
     private float prod_monto;
+
+    @OneToMany(mappedBy = "bien_prod")
+    private List<Bienes> prod_bien;
 
     public Producto() {
     }
