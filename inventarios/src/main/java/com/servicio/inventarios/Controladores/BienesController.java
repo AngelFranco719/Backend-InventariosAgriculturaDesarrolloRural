@@ -2,7 +2,7 @@ package com.servicio.inventarios.Controladores;
 
 import com.servicio.inventarios.Modelos.Bienes;
 import com.servicio.inventarios.Servicios.BienesServices;
-import java.sql.Timestamp;
+import java.sql.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -25,11 +25,16 @@ public class BienesController {
 
     @GetMapping("/filter")
     public ResponseEntity<List<Bienes>> getBienesByFilters(
-            @RequestParam(required = false) Timestamp fecha,
+            @RequestParam(required = false) String inventario,
+            @RequestParam(required = false) Date fecha,
             @RequestParam(required = false) String nombre,
-            @RequestParam(required = false) String descripcion
+            @RequestParam(required = false) String descripcion,
+            @RequestParam(required = false) String localizacion,
+            @RequestParam(required = false) String area,
+            @RequestParam(required = false) String marca
     ) {
-        List<Bienes> resultado = bienesServices.FilterBienesByParameters(fecha, nombre, descripcion);
+        List<Bienes> resultado = bienesServices.FilterBienesByParameters(fecha, nombre, descripcion,
+                localizacion, marca, inventario, area);
         if (!resultado.isEmpty()) {
             return ResponseEntity.ok(resultado);
         } else {
