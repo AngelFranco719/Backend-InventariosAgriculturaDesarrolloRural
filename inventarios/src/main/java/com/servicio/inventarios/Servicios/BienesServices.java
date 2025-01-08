@@ -11,6 +11,9 @@ import com.servicio.inventarios.Specifications.ProductoSpecifications;
 import java.sql.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -20,13 +23,15 @@ public class BienesServices {
     @Autowired
     private BienesRepository bienRepository;
 
-    public List<Bienes> selectAllBienes() {
-        return bienRepository.findAll();
+    public Page<Bienes> selectAllBienes(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return bienRepository.findAll(pageable);
     }
 
-    public List<Bienes> FilterBienesByParameters(Date fecha, String nombre,
-            String descripcion, String localizacion, String marca,
-            String inventario, String area) {
+    public Page<Bienes> FilterBienesByParameters(
+            int page, int size, Date fecha,
+            String nombre, String descripcion, String localizacion,
+            String marca, String inventario, String area) {
         Specification<Bienes> spec = Specification.where(null);
 
         if (fecha != null) {
@@ -51,7 +56,9 @@ public class BienesServices {
             spec = spec.and(AreaSpecifications.hasUnidadPresupuestal(area));
         }
 
-        return bienRepository.findAll(spec);
+        Pageable pageable = PageRequest.of(page, size);
+
+        return bienRepository.findAll(spec, pageable);
 
     }
 

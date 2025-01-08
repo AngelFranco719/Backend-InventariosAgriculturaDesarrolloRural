@@ -1,6 +1,7 @@
 package com.servicio.inventarios.Specifications;
 
 import com.servicio.inventarios.Modelos.Bienes;
+import com.servicio.inventarios.Modelos.Producto;
 import org.springframework.data.jpa.domain.Specification;
 
 public class ProductoSpecifications {

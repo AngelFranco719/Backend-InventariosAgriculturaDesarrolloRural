@@ -1,10 +1,11 @@
 package com.servicio.inventarios.Modelos;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
-@Entity
+@Entity(name = "bienes")
 public class Bienes {
 
     @Id
@@ -27,7 +28,7 @@ public class Bienes {
     private Adquisicion bien_adq;
     @ManyToOne
     @JoinColumn(name = "ID_ZonaArea")
-    @JsonBackReference
+    @JsonManagedReference
     private Zona_Area bien_zonaArea;
 
     public Bienes() {

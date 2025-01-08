@@ -3,7 +3,7 @@ package com.servicio.inventarios.Modelos;
 import jakarta.persistence.*;
 import java.util.List;
 
-@Entity
+@Entity(name = "producto")
 public class Producto {
 
     @Id

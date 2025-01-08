@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import java.util.List;
 
-@Entity
+@Entity(name = "localizacion")
 public class Localizacion {
 
     @Id

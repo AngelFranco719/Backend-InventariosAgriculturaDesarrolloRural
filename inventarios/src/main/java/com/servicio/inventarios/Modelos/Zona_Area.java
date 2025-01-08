@@ -1,10 +1,12 @@
 package com.servicio.inventarios.Modelos;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.util.List;
 
-@Entity
+@Entity(name = "zona_area")
+@JsonIgnoreProperties({"id_Bien"})
 public class Zona_Area {
 
     @Id
@@ -19,7 +21,6 @@ public class Zona_Area {
     @JsonManagedReference
     private Area area;
     @OneToMany(mappedBy = "bien_zonaArea")
-    @JsonManagedReference
     private List<Bienes> ID_Bien;
 
     public Zona_Area() {
