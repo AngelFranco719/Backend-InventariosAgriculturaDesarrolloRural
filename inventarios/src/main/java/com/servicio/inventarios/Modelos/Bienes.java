@@ -1,16 +1,18 @@
 package com.servicio.inventarios.Modelos;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
-@Entity
+@Entity(name = "bienes")
 public class Bienes {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ID_Bien;
     private String bien_inventario;
+    private String bien_serie;
     private String bien_estado;
     private String bien_color;
     private String bien_material;
@@ -27,7 +29,7 @@ public class Bienes {
     private Adquisicion bien_adq;
     @ManyToOne
     @JoinColumn(name = "ID_ZonaArea")
-    @JsonBackReference
+    @JsonManagedReference
     private Zona_Area bien_zonaArea;
 
     public Bienes() {
@@ -59,6 +61,14 @@ public class Bienes {
 
     public void setBien_inventario(String bien_inventario) {
         this.bien_inventario = bien_inventario;
+    }
+    
+    public String getBien_serie() {
+        return bien_serie;
+    }
+
+    public void setBien_serie(String bien_serie) {
+        this.bien_serie = bien_serie;
     }
 
     public String getBien_estado() {
