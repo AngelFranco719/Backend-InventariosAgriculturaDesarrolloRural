@@ -3,6 +3,7 @@ package com.servicio.inventarios.Controladores;
 import com.servicio.inventarios.Modelos.Bienes;
 import com.servicio.inventarios.Servicios.BienesServices;
 import java.sql.Date;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -31,13 +32,13 @@ public class BienesController {
     public ResponseEntity<Page<Bienes>> getBienesByFilters(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
-            @RequestParam(required = false) String inventario,
+            @RequestParam(required = false) List<String> inventario,
             @RequestParam(required = false) Date fecha,
-            @RequestParam(required = false) String nombre,
-            @RequestParam(required = false) String descripcion,
+            @RequestParam(required = false) List<String> nombre,
+            @RequestParam(required = false) List<String> descripcion,
             @RequestParam(required = false) String localizacion,
             @RequestParam(required = false) String area,
-            @RequestParam(required = false) String marca
+            @RequestParam(required = false) List<String> marca
     ) {
         Page<Bienes> resultado = bienesServices.FilterBienesByParameters(page, size, fecha, nombre, descripcion,
                 localizacion, marca, inventario, area);

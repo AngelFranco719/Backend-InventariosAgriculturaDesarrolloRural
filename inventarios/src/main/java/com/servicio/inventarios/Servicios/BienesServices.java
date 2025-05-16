@@ -30,8 +30,8 @@ public class BienesServices {
 
     public Page<Bienes> FilterBienesByParameters(
             int page, int size, Date fecha,
-            String nombre, String descripcion, String localizacion,
-            String marca, String inventario, String area) {
+            List<String> nombre, List<String> descripcion, String localizacion,
+            List<String> marca, List<String> inventario, String area) {
         Specification<Bienes> spec = Specification.where(null);
 
         if (fecha != null) {
